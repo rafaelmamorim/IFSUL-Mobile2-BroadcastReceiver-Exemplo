@@ -19,7 +19,7 @@ public class MyReceiver extends BroadcastReceiver {
 
         if (Objects.equals(intent.getAction(), Intent.ACTION_SCREEN_OFF)) {
             Log.i(TAG, "Screen OFF");
-        } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
+        } else if (Objects.equals(intent.getAction(), Intent.ACTION_SCREEN_ON)) {
             Log.i(TAG, "Screen  ON");
         }
     }

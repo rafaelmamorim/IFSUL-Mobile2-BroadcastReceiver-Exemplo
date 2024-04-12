@@ -4,7 +4,7 @@
     </a>
 </p>
 
-# Exemplo de uso do WorkManager
+# Exemplo de uso do BroadcastReceiver
 
 Repositório criado para mostrar uma aplicação simples usando BroadcastReceiver na disciplina de
 Desenvolvimento Mobile II, do curso de Tecnólogo em Analise e Desenvolvimento de Sistemas do

@@ -3,6 +3,7 @@ package br.com.rafaelamorim.broadcastreceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,18 +13,33 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "BroadcastReceiver.MainActivity";
+    private MyReceiver receiver;
+    private boolean receiverRegistrado = false;
 
     @Override
     protected void onStart() {
         super.onStart();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_SCREEN_OFF);
-        filter.addAction(Intent.ACTION_SCREEN_ON);
-        filter.addAction(Intent.ACTION_USER_UNLOCKED);
-        filter.addAction(Intent.ACTION_USER_PRESENT);
 
-        MyReceiver receiver = new MyReceiver();
-        registerReceiver(receiver, filter);
+        if (!receiverRegistrado) {
+            receiver = new MyReceiver();
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(Intent.ACTION_SCREEN_OFF);
+            filter.addAction(Intent.ACTION_SCREEN_ON);
+            registerReceiver(receiver, filter);
+            Log.i(TAG, "Registrando o receiver");
+            receiverRegistrado = true;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (receiverRegistrado) {
+            Log.i(TAG, "Removendo o receiver");
+            unregisterReceiver(receiver);
+            receiverRegistrado = false;
+        }
     }
 
     @Override

@@ -1,3 +1,13 @@
+/**
+ * A MainActivity é a tela principal do aplicativo.
+ *
+ * Esta atividade demonstra o registro e o cancelamento do registro de um {@link MyReceiver}
+ * para ouvir as ações de ligar e desligar a tela ({@link Intent#ACTION_SCREEN_ON} and
+ * {@link Intent#ACTION_SCREEN_OFF}).
+ *
+ * O receptor é registrado no método {@link #onStart()} e o registro é cancelado no
+ * método {@link #onDestroy()} para evitar vazamentos de memória.
+ */
 package br.com.rafaelamorim.broadcastreceiver;
 
 import android.content.Intent;
@@ -17,6 +27,14 @@ public class MainActivity extends AppCompatActivity {
     private MyReceiver receiver;
     private boolean receiverRegistrado = false;
 
+    /**
+     * Chamado quando a atividade está se tornando visível para o usuário.
+     *
+     * Neste método, registramos o {@link MyReceiver} para receber intents com as ações
+     * {@link Intent#ACTION_SCREEN_OFF} e {@link Intent#ACTION_SCREEN_ON}.
+     * Um sinalizador {@code receiverRegistrado} é usado para garantir que o receptor seja
+     * registrado apenas uma vez.
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -32,6 +50,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Chamado antes de a atividade ser destruída.
+     *
+     * Neste método, cancelamos o registro do {@link MyReceiver} para evitar vazamentos de
+     * memória se o receptor foi registrado.
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -42,6 +66,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Chamado quando a atividade é criada pela primeira vez.
+     *
+     * Este método é responsável por configurar a interface do usuário da atividade.
+     *
+     * @param savedInstanceState Se a atividade estiver sendo reiniciada após ter sido
+     *                           desligada anteriormente, este Pacote contém os dados que ela
+     *                           forneceu mais recentemente em {@link #onSaveInstanceState}.
+     *                           <b><i>Observação: Caso contrário, ele será nulo.</i></b>
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

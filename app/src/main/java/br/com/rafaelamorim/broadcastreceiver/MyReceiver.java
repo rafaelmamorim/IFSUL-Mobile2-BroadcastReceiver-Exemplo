@@ -8,12 +8,21 @@ import android.util.Log;
 import java.util.Objects;
 
 
+/**
+ * MyReceiver é um BroadcastReceiver que escuta por ações de tela ligada e desligada.
+ * Ele registra uma mensagem de log quando a tela é desligada ou ligada.
+ */
 public class MyReceiver extends BroadcastReceiver {
     String TAG = "BroadcastReceiver.MyReceiver";
     public MyReceiver() {
         super();
     }
 
+    /**
+     * Este método é chamado quando o BroadcastReceiver está recebendo um Intent broadcast.
+     * @param context O Contexto no qual o receptor está sendo executado.
+     * @param intent O Intent que está sendo recebido.
+     */
     @Override
     public void onReceive(Context context, Intent intent) {
 
@@ -24,4 +33,3 @@ public class MyReceiver extends BroadcastReceiver {
         }
     }
 }
-
